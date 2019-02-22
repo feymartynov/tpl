@@ -23,4 +23,12 @@ defmodule Tpl.Operation do
       {:error, reason} -> {:error, reason}
     end
   end
+
+  def publish(operation, topic, message) do
+    step(operation, {:publish, make_ref()}, fn txn ->
+      topic = if is_function(topic, 1), do: topic.(txn), else: topic
+      message = if is_function(message, 1), do: message.(txn), else: topic
+      Phoenix.PubSub.broadcast(Tpl.PubSub, topic, message)
+    end)
+  end
 end
