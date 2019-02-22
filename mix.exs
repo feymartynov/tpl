@@ -48,6 +48,7 @@ defmodule Tpl.MixProject do
       {:bcrypt_elixir, "~> 2.0"},
       {:arc_ecto, "~> 0.11.1"},
       {:ex_operation, "~> 0.5"},
+      {:bodyguard, "~> 2.2"},
       {:wallaby, "~> 0.21", [runtime: false, only: :test]}
     ]
   end

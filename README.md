@@ -8,6 +8,7 @@ This is a template app for quick starting a new project.
 * Ecto 3 with Postgres adapter
 * Basic sign up/in/out and profile
 * ExOperation for business logic
+* Bodyguard for authorization
 * Slime HTML template language
 * React, Bootstrap 4, SCSS and font-awesome on frontend
 * Websockets authorization setup
