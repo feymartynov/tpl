@@ -1,0 +1,43 @@
+h1 = gettext("Profile")
+
+= form_for @changeset, Routes.user_path(@conn, :update), [as: :user, method: :put], fn f ->
+  .form-group
+    = label f, :name, gettext("Name")
+    = text_input f, :name, class: "form-control"
+    = error_tag f, :name
+
+  .form-group
+    = label f, :email, gettext("Email")
+    = email_input f, :email, class: "form-control"
+    = error_tag f, :email
+
+  = submit gettext("Save"), class: "btn btn-primary btn-block"
+
+hr
+h2 = gettext("Avatar")
+
+img.img-responsive src="#{avatar_url(@changeset.data, :big)}" alt="#{gettext("Avatar")}"
+
+= form_for @changeset, Routes.user_path(@conn, :update), [as: :user, method: :put, multipart: true], fn f ->
+  .custom-file.mt-3.mb-3
+    = file_input f, :avatar, class: "custom-file-input"
+    = label f, :avatar, gettext("Upload"), class: "custom-file-label"
+    = error_tag f, :avatar
+
+  = submit gettext("Upload avatar"), class: "btn btn-primary btn-block"
+
+hr
+h2 = gettext("Change password")
+
+= form_for @changeset, Routes.user_path(@conn, :update), [as: :user, method: :put], fn f ->
+  .form-group
+    = label f, :current_password, gettext("Current password")
+    = password_input f, :current_password, class: "form-control"
+    = error_tag f, :current_password
+
+  .form-group
+    = label f, :password, gettext("New password")
+    = password_input f, :password, class: "form-control"
+    = error_tag f, :password
+
+  = submit gettext("Change password"), class: "btn btn-primary btn-block"

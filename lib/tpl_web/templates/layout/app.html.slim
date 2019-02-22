@@ -1,0 +1,37 @@
+doctype html
+html lang="ru"
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="ws_token" content="#{ws_token(@conn)}"
+
+    title = gettext("Template App")
+    link rel="stylesheet" href="#{Routes.static_path(@conn, "/css/app.css")}"
+
+  body
+    .container
+      header
+        = link to: "/" do
+          img.logo src="#{Routes.static_path(@conn, "/images/logo.png")}"
+
+        = if @conn.assigns[:current_user] do
+          .float-right
+            .dropdown          
+              img.avatar.dropdown-toggle src="#{TplWeb.UserView.avatar_url(@conn.assigns.current_user)}" data-toggle="dropdown"
+
+              .dropdown-menu.dropdown-menu-right
+                p.text-center.ml-3.mr-3.mt-2: strong = @conn.assigns.current_user.name
+
+                .dropdown-divider
+                = link gettext("Profile"), to: Routes.user_path(@conn, :edit), class: "dropdown-item"
+                = link gettext("Sign out"), to: Routes.session_path(@conn, :delete), method: :post, class: "dropdown-item"
+
+      .clearfix
+
+      = alert(@conn, :info)
+      = alert(@conn, :error)
+
+      main role="main" = render @view_module, @view_template, assigns
+
+    script src="#{Routes.static_path(@conn, "/js/app.js")}"

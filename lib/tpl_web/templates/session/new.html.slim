@@ -1,0 +1,16 @@
+h1 = gettext("Sign in")
+
+= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f ->
+  .form-group
+    = label f, :email, gettext("Email")
+    = text_input f, :email, class: "form-control"
+
+  .form-group
+    = label f, :password, gettext("Password")
+    = password_input f, :password, class: "form-control"
+
+  = submit gettext("Sign in"), class: "btn btn-primary btn-block"
+
+hr
+
+= link gettext("Sign up"), to: Routes.user_path(@conn, :new)

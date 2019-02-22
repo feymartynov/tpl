@@ -1,0 +1,19 @@
+h1 = gettext("Registration")
+
+= form_for @changeset, Routes.user_path(@conn, :create), [as: :user], fn f ->
+  .form-group
+    = label f, :name, gettext("Name")
+    = text_input f, :name, class: "form-control"
+    = error_tag f, :name
+
+  .form-group
+    = label f, :email, gettext("Email")
+    = email_input f, :email, class: "form-control"
+    = error_tag f, :email
+
+  .form-group
+    = label f, :password, gettext("Password")
+    = password_input f, :password, class: "form-control"
+    = error_tag f, :password
+
+  = submit gettext("Sign up"), class: "btn btn-primary btn-block"
